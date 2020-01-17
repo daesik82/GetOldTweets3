@@ -181,8 +181,8 @@ class TweetManager:
         are = re.compile("^(.*?)(<a href=[^>]+>(.*?)</a>)(.*)$")
 
         # Step 1, prepare a single-line string for re convenience
+        puc = chr(0xE001)
         if type(html) == str:
-            puc = chr(0xE001)
             html = html.replace("\n", puc)
         else:
             html = ''
