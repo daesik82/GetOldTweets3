@@ -173,8 +173,6 @@ class TweetManager:
         emoji images with appropriate emoji markup, replace links with the original
         URIs, and discard all other markup.
         """
-        if len(html) == 0:
-            break
         
         # Step 0, compile some convenient regular expressions
         imgre = re.compile("^(.*?)(<img.*?/>)(.*)$")
@@ -183,8 +181,11 @@ class TweetManager:
         are = re.compile("^(.*?)(<a href=[^>]+>(.*?)</a>)(.*)$")
 
         # Step 1, prepare a single-line string for re convenience
-        puc = chr(0xE001)
-        html = html.replace("\n", puc)
+        if type(html) == str:
+            puc = chr(0xE001)
+            html = html.replace("\n", puc)
+        else:
+            html = ''
 
         # Step 2, find images that represent emoji, replace them with the
         # Unicode codepoint of the emoji.
